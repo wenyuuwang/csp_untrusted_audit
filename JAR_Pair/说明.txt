@@ -1,0 +1,13 @@
+csp: class文件放到makeJAR中，打包成ServerJAR文件，用：jar cvfm makeCSP.jar manifest.mf ./ 
+user: class文件放到makeUserJAR中，打包成ClientJAR文件， 用：jar cvfm makeUser.jar manifest.mf ./ 
+owner: 调整code中的参数，可以加密指定的block或者acl，为上传做准备。
+
+makeJAR：包括class文件, block_index_list和加密的acl， manifest
+makeUserJAR: class文件，manifest
+
+attest: 两个预先生成的attestation，将此文件夹其Server JAR放在同一目录下，存储程序运行中生成的attestation
+blocks: csp中存储的block格式（是block文件和对应的签名），也是user解密的文件格式。
+blocks_pre: 将新的block文件(由owner加密所得，签名在文件末尾) 放在此目录下，运行block update之后blocks内的同名文件和签名被更新。
+
+blockID.txt text_url.txt request.txt permission.txt: 格式示例。
+privatekey.dat和pubkey.dat是一对密钥，运行时与Server JAR放在同一目录下, 用于distributed 方案中的attestaiton加密（见class RSAen in csp）
